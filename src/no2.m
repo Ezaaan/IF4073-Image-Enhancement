@@ -1,13 +1,15 @@
-i = imread('cof.tif');
+%i = imread('cof.tif');
 
-imshow(i);
-displayHistogram(i);
-
+%imshow(i);
+%displayHistogram(i);
+s
 % brightening(i, 1, 100);
 % negative(i);
 % logTransformation(i, 3);
 % powerTransformation(i, 1, 5);
-contrastStretching(i);
+%contrastStretching(i);
+
+
 
 
 function brightening(image, a, b)
