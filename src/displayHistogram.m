@@ -1,11 +1,4 @@
-grayscaleImage = imread('boat.bmp');
-rgbImage = imread('s.tif');
-g = imread('cof.tif');
-
-histogram(rgbImage);
-
-
-function histogram(image)
+function displayHistogram(image)
     if size(image, 3) == 1
         displayGrayscaleHistogram(image);
     else

@@ -1,10 +1,14 @@
 i = imread('cof.tif');
-% figure, histogram(i);
+
+imshow(i);
+displayHistogram(i);
+
 % brightening(i, 1, 100);
 % negative(i);
 % logTransformation(i, 3);
 % powerTransformation(i, 1, 5);
 contrastStretching(i);
+
 
 function brightening(image, a, b)
     s = a * image + b;
@@ -12,7 +16,7 @@ function brightening(image, a, b)
     s = min(max(s, 0), 255);
 
     figure, imshow(s), title("Brightened image");
-    figure, histogram(s);
+    displayHistogram(s);
 end
 
 
@@ -20,25 +24,27 @@ function negative(image)
     s = 255 - image;
     
     figure, imshow(s), title("Negative image");
-    figure, histogram(s);
+    displayHistogram(s);
 end
 
 
 function logTransformation(image, c)
     r = im2double(image);
     s = c * log(1 + r);
-    
+    s = im2uint8(s);
+
     figure, imshow(s), title ('Log transformation image');
-    figure, histogram(s);
+    displayHistogram(s);
 end
 
 
 function powerTransformation(image, c, gamma)
     r = im2double(image);
     s = c * r .^ gamma;
+    s = im2uint8(s);
 
     figure, imshow(s), title ('Power transformation image');
-    figure, histogram(s);
+    displayHistogram(s);
 end
 
 
@@ -55,7 +61,7 @@ function contrastStretching(image)
         rminB = double(min(blueChannel(:)));
         rmaxB = double(max(blueChannel(:)));
         
-        % Stretch RGB channel
+        % Stretch the RGB channel
         sR = (double(redChannel) - rminR) * (255 / (rmaxR - rminR));
         sG = (double(greenChannel) - rminG) * (255 / (rmaxG - rminG));
         sB = (double(blueChannel) - rminB) * (255 / (rmaxB - rminB));
@@ -70,7 +76,7 @@ function contrastStretching(image)
         s = (double(image) - rmin) * (255 / (rmax - rmin));
         s = uint8(s);
     end
-
+    
     figure, imshow(s), title('Contrast Stretched Image');
-    figure, histogram(s);
+    displayHistogram(s);
 end
