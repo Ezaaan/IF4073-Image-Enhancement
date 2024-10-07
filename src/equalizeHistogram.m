@@ -1,11 +1,3 @@
-i = imread('na.jpg');
-
-imshow(i);
-displayHistogram(i);
-
-equalizeHistogram(i);
-
-
 function equalizeHistogram(image)
     if size(image, 3) == 1
         equalizeGrayscaleHistogram(image);
