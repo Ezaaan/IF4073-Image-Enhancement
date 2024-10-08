@@ -1,13 +1,13 @@
-function specificateHistogram(image, ref_image)
+function img = specificateHistogram(image, ref_image)
     if size(image, 3) == 1
-        specificateGrayscaleHistogram(image, ref_image);
+        img = specificateGrayscaleHistogram(image, ref_image);
     else
-        specificateRGBHistogram(image, ref_image);
+        img = specificateRGBHistogram(image, ref_image);
     end
 end
 
 
-function specificateGrayscaleHistogram(image, ref_image)
+function img = specificateGrayscaleHistogram(image, ref_image)
     [~, oriRoundedMappingList] = equalizeGrayscaleHistogram(image);
     [refMappingList, ~] = equalizeGrayscaleHistogram(ref_image);
 
@@ -20,14 +20,11 @@ function specificateGrayscaleHistogram(image, ref_image)
     end
 
     % Map the new pixel to the image
-    new_image = uint8(newMappingList(image + 1));
-
-    figure, imshow(new_image), title('Specificated grayscale image');
-    displayHistogram(new_image);
+    img = uint8(newMappingList(image + 1));
 end
 
 
-function specificateRGBHistogram(image, ref_image)
+function img = specificateRGBHistogram(image, ref_image)
     % Split the image into Red, Green, and Blue channels
     red_channel = double(image(:,:,1));
     green_channel = double(image(:,:,2));
@@ -61,10 +58,7 @@ function specificateRGBHistogram(image, ref_image)
     new_blue_channel = uint8(newBMaps(blue_channel + 1));
 
     % Recombine the RGB channel
-    new_image = cat(3, new_red_channel, new_green_channel, new_blue_channel);
-
-    figure, imshow(new_image), title('Specificated RGB image');
-    displayHistogram(new_image);
+    img = cat(3, new_red_channel, new_green_channel, new_blue_channel);
 end
 
 

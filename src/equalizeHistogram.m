@@ -1,13 +1,13 @@
-function equalizeHistogram(image)
+function img = equalizeHistogram(image)
     if size(image, 3) == 1
-        equalizeGrayscaleHistogram(image);
+        img = equalizeGrayscaleHistogram(image);
     else
-        equalizeRGBHistogram(image);
+        img = equalizeRGBHistogram(image);
     end
 end
 
 
-function equalizeGrayscaleHistogram(image)
+function img = equalizeGrayscaleHistogram(image)
     image_vector = double(image(:));
     pixel_count = zeros(1, 256, 'double');
     n = length(image_vector);
@@ -28,14 +28,11 @@ function equalizeGrayscaleHistogram(image)
     pixel_count = floor(pixel_count * 255);
 
     % Map the new pixel to the image
-    new_image = uint8(pixel_count(image + 1));
-
-    figure, imshow(new_image), title('Equalized grayscale image');
-    displayHistogram(new_image);
+    img = uint8(pixel_count(image + 1));
 end
 
 
-function equalizeRGBHistogram(image)
+function img = equalizeRGBHistogram(image)
     % Split the image into Red, Green, and Blue channels
     red_channel = double(image(:,:,1));
     green_channel = double(image(:,:,2));
@@ -74,8 +71,5 @@ function equalizeRGBHistogram(image)
     new_blue_channel = uint8(blue_count(blue_channel + 1));
 
     % Recombine the RGB channel
-    new_image = cat(3, new_red_channel, new_green_channel, new_blue_channel);
-
-    figure, imshow(new_image), title('Equalized RGB image');
-    displayHistogram(new_image);
+    img = cat(3, new_red_channel, new_green_channel, new_blue_channel);
 end
