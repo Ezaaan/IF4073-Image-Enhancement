@@ -4,5 +4,5 @@
 Open `App.mlapp` using Matlab and run it.
 
 # Team Members
-M. Equilibrie Fajria - 13521141
+M. Equilibrie Fajria - 13521141 <br>
 Edia Zaki Naufal Ilman - 13521141
